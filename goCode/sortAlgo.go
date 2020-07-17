@@ -5,72 +5,8 @@ import (
     "sync"
 )
 var wg sync.WaitGroup
-// func main() {
-//     // 列举出1-120000之间的素数  除了1和它自身外，不能被其他自然数整除的数叫做质数 倍数也不是
-//     start := time.Now().Unix()
-//     for i:=2;i<200000;i++{
-//         var flag=true
-//         for n:=2;n<i;n++{
-//             if i%n==0{
-//                 flag=false
-//                 break
-//             }
-//         }
-//         if flag{
-//             // fmt.Println(i,"是素数")
-//         }
-//     }
-//     end := time.Now().Unix()
-//     fmt.Println(end-start)
-// }
 
-// 利用协程的多核并发执行任务，看下时间效率 启动4个协程
-// func main() {
-//     start := time.Now().Unix()
-//     for i := 1; i <= 4; i++ { //启动了4个协程!
-//         wg.Add(1) //如果有多个协程 就设置多个 wg.Add()
-//         go B(i)
-//     }
-//     wg.Wait()
-//     end := time.Now().Unix()
-//     fmt.Println("是质数")
-//     fmt.Println(111,end-start)
-// }
-
-func B(num int){
-    // 4*30000==120000 循环这么多的数，然后分4个协程统计质数!
-    for i:=(num-1)*50000+1;i<num*50000;i++{
-        if i>1{
-            var flag=true
-            for n:=2;n<i;n++{
-                if i%n==0{
-                    flag=false
-                    break
-                }
-            }
-            if flag{
-            // fmt.Println(i,"是素数")
-            }
-        }
-    }
-    wg.Done()
-}
-
-// channle管道
 func main() {
-    ch := make(chan int,10)
-    for i:=0;i<10;i++{
-        ch <- i
-    }
-    // close(ch)
-    // 如果是使用 for range 上一个循环就得关闭管道ch
-    // for v := range ch{
-    //     fmt.Println(v)
-    // }
-    // 如果是通过 for循环迭代，不会出现死锁 range方法就会出现死锁
-    for j:=0;j<10;j++{
-        fmt.Println(<-ch)
-    }
     li := [9]int{54, 26, 93, 55, 77, 31, 44, 55, 20}
     buddle_sort(li)
     select_sort(li)
