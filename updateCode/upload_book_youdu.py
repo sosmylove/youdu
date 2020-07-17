@@ -19,7 +19,7 @@ class upload_biqu_book(object):
         self.req = sendRequest()
         self.biquSql = uploadBookSql()
         self.base_url = "http://www.biqugew.com"
-        self.url="http://api10.youduwen.com/book/book/auto-gather-list?page=1&rows=600"
+        self.url=""
         self.parts_link = "https://4newtext.blob.core.windows.net/"
         self.cache_url = "http://api10.youduwen.com/book/part/clean-cache?"
         self.mengzeda = "https://www.mengzeda.cn"
