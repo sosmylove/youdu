@@ -1,0 +1,160 @@
+#===========================
+# 解析链接，杂文内容，缓存规则
+#===========================
+
+def linkRule(webSite,book_url):
+    RuleDict = {
+        "mengzeda":"https://www.mengzeda.cn",
+        "xiaoshuo5":"https://www.xiaoshuo5.org",
+        "33yq":"https://www.33yq.com",  
+        "f96":"https://www.f96.net",
+        "kanshu8":"http://www.kanshu8.net",
+        "bjgjwy":"http://www.bjgjwy.net",
+        "biquguan":"https://www.biquguan.com",
+        "78zw":"https://www.78zw.com",
+        "nbaxiaoshuo":"http://www.nbaxiaoshuo.com",
+        "xs386":"https://www.xs386.com",
+        "biqubao":"https://www.biqubao.com",
+        "23txt":"https://www.23txt.com",
+        "huangyixiaoshuo":"https://www.huangyixiaoshuo.com",
+        "dingdianorg":"https://www.dingdianorg.com",
+        "shuhaige":"https://www.shuhaige.net",
+        "bqg5":"https://www.bqg5.cc",
+        "91baby":"http://www.91baby.org",
+        "xxxbiquge":"https://www.xxxbiquge.com",
+        "biqusa":"https://www.biqusa.com",
+        "999xs":"https://www.999xs.com",
+        "biqugetv":"https://www.biqugetv.com",
+        "kenshu":"http://www.kenshuzw.com",
+        "biqugela":"https://www.biqugela.com",
+        "geilwx":"https://www.geilwx.com",
+        "biduo":"https://www.biduo.cc",
+        "tianxiabachang":"http://www.tianxiabachang.cn",
+        "biqutxt": "http://www.biqutxt.com",
+        "5kanxs": "https://www.5kanxs.com",
+        "booktxt": "https://www.booktxt.com",  
+        "lianzais": "http://www.lianzais.com",
+        "xsw5": "https://www.xsw5.com",
+        "biqiuge": "https://www.biqiuge.com", 
+    }
+    allLink = RuleDict.get(webSite, book_url)
+    return allLink
+
+
+def contentRule(webSite,html):
+    contentRuleDict = {
+        "2kxs": html.xpath("//p[@class='Text']/text()"),
+        "kushubao": html.xpath("//div[@id='htmlContent']/text()"),
+        "biqugeso": html.xpath("//div[@id='content']/div[3]/text()"),
+        "zuimeng": html.xpath("//p[@id='articlecontent']/text()"),
+        "33yq": html.xpath("//div[@id='content']/p/text()"),
+        "yqhy": html.xpath("//div[@id='content']/p/text()"),
+        "kanshu8":html.xpath("//div[@class='size16 color5 pt-read-text']/p/text()"),    
+        "dhzw": html.xpath("//div[@id='BookText']/text()"),
+        "shusvip":html.xpath("//div[@id='content']/p/text()"),
+        "bqg5":html.xpath("//div[@id='content']/p/text()"),
+        "biqugela":html.xpath("//div[@id='content']/p/text()"), 
+        "geilwx":html.xpath("//div[@id='content']/p/text()") ,
+        "xsw5": html.xpath("//div[@id='content']/p/text()"), 
+        "biqushu":html.xpath("//div[@id='htmlContent']/text()"),
+        "biquinfo2":html.xpath("//div[@id='htmlContent']/text()"),
+        "f96": html.xpath("//div[@id='htmlContent']/text()"),
+        "nbaxiaoshuo": html.xpath("//div[@class='readcotent001 readcotent font-normal']/p/text() | //div[@class='readcotent font-normal']/text()"),
+        "mmmli":html.xpath("//div[@class='content']/text()"),
+        "shuhaige":html.xpath("//div[@class='content']/text()"),
+        "jjwxc": html.xpath("//div[@class='noveltext']/text()"),
+        "dingdianorg": html.xpath("//div[@id='TXT']/text()"),
+        "longwangtai":html.xpath("//div[@id='BookText']/p/text()"),
+        "kenshu": html.xpath("//div[@class='article-con']/text()"),
+        "5kanxs":html.xpath("//div[@id='htmlContent']/p/text()"), 
+        "lianzais":html.xpath("//div[@id='read-content']/p/text()"),    
+    }
+    allLink = contentRuleDict.get(webSite, html.xpath("//div[@id='content']/text()"))
+    return allLink
+
+
+def cacheBook(bookName):
+    cacheIdDict={
+        "豪婿":[73608629,73883607],
+        "我不想继承万亿家产":[73608630,73883611,73606826],
+        "重生当首富继承人":[64657050],
+        "开局富可敌国":[73608632],
+        "继承罗斯柴尔德":[73608633,73883612,73883619,73883620],
+        "天降巨富":[73608634],
+        "顶级神豪":[73608635],
+        "最强高手在花都":[73883603,73883602,73883604],
+        "我爷爷是迪拜首富":[72636831,73886768],
+        "无敌战神":[73883616,73883617,73883618],
+        "超牛女婿":[73883625],
+        "超武女婿":[73883627,73883628,73883629],
+        "天降横财":[73608631],
+        "神级龙卫":[73549054],
+        "上门狂婿":[73883608,73883609,73883610],
+        "我的老妈是土豪":[73608636,73883630,73883631],
+        "我的微信连三界":[73883634,73883633,73883632],
+        "绝世战神":[73883643,73884429],
+        "赘婿当道":[73886713, 73883644,73883645,73883663,73883944,73883945,73883958,73886855],
+        "最强赘婿奶爸":[73883648],
+        "至尊战神":[73883649,73883650,73883651,73883652,73883615],
+        "都市无敌战神":[73883657,73883658,73883957,73886754,73886755],
+        "都市无双战神":[73883660],
+        "第一战神":[73883662],
+        "绝世大少":[73883947,73883948,73883949,73883950,73883951,73883952],
+        "龙抬头":[73889353,73883954,73883955,73883956],
+        "虎婿":[73884438,73884437,73884436,73884435,73884434,73884433,73884432],
+        "龙门归来":[73886728,73886729],
+        "豪门神婿":[73886730,73886731,73886732],
+        "最豪赘婿":[73886734,73886735,73886736,73886737,73886738,73886739,73886740],
+        "女总裁的上门女婿":[73886752,73886753],
+        "最强赘婿奶爸":[73886757],
+        "我的奋斗人生":[73886758,73886759,73886760],
+        "上门豪婿":[73886763,73886764,73886765,73886766,73886767],
+        "我的师父是神仙":[73886770],
+        "王者归来范建明":[73886775,73886776,73886777,73886778,73886779,73886780,73886781,73886782],
+        "无敌战神秦风龙小云":[73886784,73886785,73886786,73886787],
+        "超品农婿":[73886790,73886789],
+        "都市之最强狂兵":[954,73864727,73886792],
+        "东山再起杨天":[73886796,73886797,73886798,73886799,73886800],
+        "至尊龙婿叶辰":[73886807,73886806,73886805,73886804,73886803,73886802],
+        "顶级高手":[73886823,73886822],
+        "财神娇妻，你好甜！":[73886824],
+        "乔笙晚莫凉柯":[73886844,73886845],
+        "逍遥战神":[73886846,73886847,73886848,73886849,73886850,73886851,73886852],
+        "弃婿归来":[73886833,73886831],
+        "女神的超级赘婿":[73886854],
+        "叶凌天秦雪莹":[73886857,73886858,73886859,73886860,73886861,73886862],
+        "顶级狂婿陈阳":[73886864],
+        "绝品废婿林浩":[73886867],
+        "乔振宇苏妍":[73886870],
+        "战神之王":[73886871],
+        "盖世战神":[73886916,73886926],
+        "不败战神":[73886925,73886904],
+        "少年风水师":[73886927,73886928],
+        "唯我独尊":[73886937,73886938,73886939,73886940],
+        "绝佳强少":[73886868],
+        "天王殿":[73886941,73886942,73886943,73886950],
+        "豪门战神":[73886951],
+        "浴火弃少":[73886957,73886958,73886959,73886960]
+    }    
+    idList = cacheIdDict.get(bookName,"")
+    return idList
+
+
+def essayText(webSite):
+    essayContentDict={
+        "2kxs":"2k小说阅读网",
+        "biqushu":"一秒记住【笔趣阁小说网 www.biqushu.com】，精彩小说无弹窗免费阅读！",
+        "biqugeso":"请记住【笔趣阁 m.biqugeso.com】，第一时间更新，无弹窗，免费读！",
+        "kushubao":"一秒记住【酷书包 WWW.KuShuBao.CC】，福利来了,酷书包最新入库十万本完本短篇言情小说.大家有眼福了哦.",
+        "biqu":"笔趣阁 www.biqu.info，最快更新他比时光温暖最新章节！",
+        "bbiquge":"一秒记住【笔趣阁 www.bbiquge.com】，精彩小说无弹窗免费阅读！",
+        "mengzeda":"百文择【www.mengzeda.cn】",
+        "biqutxt": "“不”手机阅读地址：m.biqutxt.com",
+        "biqugeso":"请记住【笔趣阁 m.biqugeso.com】，第一时间更新，无弹窗，免费读！",
+        "shuhaige":"您可以在百度里搜索“代号修罗 书海阁小说网(www.shuhaige.com)”查找最新章节！",
+        "xsw5":"一秒记住ｈttps://wｗw.xsｗ5.com",
+        "biqiuge":"请记住本书首发域名：biqiuge.com。笔趣阁手机版阅读网址：wap.biqiuge.com",
+        "biqiuge":"https://www.biqiuge.com",
+    }
+    essayTextStr = essayContentDict.get(webSite, "")
+    return essayTextStr
